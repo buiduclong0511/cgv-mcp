@@ -1,17 +1,17 @@
 # cgv-mcp
 
-Cogover MCP Server - tuong tac voi Cogover API thong qua Model Context Protocol.
+Cogover MCP Server - tương tác với Cogover API thông qua Model Context Protocol.
 
-## Cai dat
+## Cài đặt
 
 ```bash
 npm install
 npm run build
 ```
 
-## Cau hinh
+## Cấu hình
 
-Them vao Claude Code MCP settings:
+Thêm vào Claude Code MCP settings:
 
 ```json
 {
@@ -28,21 +28,21 @@ Them vao Claude Code MCP settings:
 
 ### `set_api_key`
 
-Luu API key de xac thuc voi Cogover API.
+Lưu API key để xác thực với Cogover API.
 
 ### `show_api_key`
 
-Hien thi API key dang duoc luu (da mask).
+Hiển thị API key đang được lưu (đã ẩn bớt).
 
 ### `get_task`
 
-Lay thong tin task tu Cogover URL. Ho tro ca 2 dang URL:
+Lấy thông tin task từ Cogover URL. Hỗ trợ cả 2 dạng URL:
 - `/Software/s/{object_slug}/{auto_task_id}`
 - `/Software/o/{object_slug}/{id}`
 
 ### `get_git_branches`
 
-Lay thong tin FE git branches tu mot development task URL. Tu dong tim activity note chua thong tin branch tuong ung.
+Lấy thông tin FE git branches từ một development task URL. Tự động tìm activity note chứa thông tin branch tương ứng.
 
 ## Tech Stack
 
