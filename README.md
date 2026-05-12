@@ -40,6 +40,12 @@ Lấy thông tin task từ Cogover URL. Hỗ trợ cả 2 dạng URL:
 - `/Software/s/{object_slug}/{auto_task_id}`
 - `/Software/o/{object_slug}/{id}`
 
+### `get_bug`
+
+Lấy thông tin bug từ Cogover URL của object `bug_tracking`. Hỗ trợ cả 2 dạng URL:
+- `/Software/s/bug_tracking/{bug_auto_number}` (ví dụ `SBT-4089`)
+- `/Software/o/bug_tracking/{id}`
+
 ### `get_git_branches`
 
 Lấy thông tin FE git branches từ một development task URL. Tự động tìm activity note chứa thông tin branch tương ứng.

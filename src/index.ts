@@ -305,6 +305,60 @@ server.tool(
   }
 );
 
+// Tool: Get bug from Cogover URL
+server.tool(
+  "get_bug",
+  "Get bug details from a Cogover bug_tracking URL. Supports /s/ (bug_auto_number) and /o/ (id) URL patterns.",
+  {
+    url: z
+      .string()
+      .url()
+      .describe(
+        "Cogover bug URL, e.g. https://stringee.cogover.com/Software/s/bug_tracking/SBT-4089"
+      ),
+    fields: z
+      .array(z.string())
+      .optional()
+      .describe("Optional list of fields to return"),
+  },
+  async ({ url, fields }) => {
+    const config = readConfig();
+    if (!config?.apiKey) {
+      return {
+        content: [
+          {
+            type: "text",
+            text: "No API key found. Use set_api_key to store one first.",
+          },
+        ],
+      };
+    }
+
+    const urlInfo = parseTaskUrl(url);
+    if (!urlInfo) {
+      return {
+        content: [
+          {
+            type: "text",
+            text: "Invalid URL format. Expected: /Software/s/{object_slug}/{id} or /o/{object_slug}/{id}",
+          },
+        ],
+      };
+    }
+
+    const filterField = urlInfo.type === "s" ? "bug_auto_number" : "id";
+    const data = await fetchRecords(config.apiKey, {
+      objectSlug: urlInfo.objectSlug,
+      filters: [{ field: filterField, op: "=", params: urlInfo.identifier }],
+      fields,
+    });
+
+    return {
+      content: [{ type: "text", text: JSON.stringify(data, null, 2) }],
+    };
+  }
+);
+
 async function main() {
   const transport = new StdioServerTransport();
   await server.connect(transport);
