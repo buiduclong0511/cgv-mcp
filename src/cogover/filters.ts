@@ -61,6 +61,29 @@ export const filters = {
     params: values,
     fieldType,
   }),
+  between: (
+    field: string,
+    from: unknown,
+    to: unknown,
+    fieldType?: FieldType,
+  ): Filter => ({
+    field,
+    op: "between",
+    params: [from, to],
+    fieldType,
+  }),
+  gte: (field: string, value: unknown, fieldType?: FieldType): Filter => ({
+    field,
+    op: ">=",
+    params: value,
+    fieldType,
+  }),
+  lte: (field: string, value: unknown, fieldType?: FieldType): Filter => ({
+    field,
+    op: "<=",
+    params: value,
+    fieldType,
+  }),
 };
 
 export type FilterLogic = 1 | 2 | 3;

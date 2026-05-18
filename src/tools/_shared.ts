@@ -53,7 +53,14 @@ export async function runSafe<T>(
     return formatSuccess(result);
   } catch (err) {
     if (err instanceof CogoverApiError) {
-      return respondError(`Cogover API error: ${err.message}`);
+      const rawText =
+        typeof err.raw === "string"
+          ? err.raw
+          : err.raw === null || err.raw === undefined
+            ? ""
+            : JSON.stringify(err.raw);
+      const detail = rawText ? `\nRaw: ${rawText.slice(0, 1500)}` : "";
+      return respondError(`Cogover API error: ${err.message}${detail}`);
     }
     const msg = err instanceof Error ? err.message : String(err);
     return respondError(`Unexpected error: ${msg}`);

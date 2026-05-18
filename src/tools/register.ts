@@ -5,6 +5,8 @@ import { registerGetTask } from "./get-task.js";
 import { registerGetBug } from "./get-bug.js";
 import { registerGetGitBranches } from "./get-git-branches.js";
 import { registerGetRecord } from "./get-record.js";
+import { registerGetWorkingHours } from "./get-working-hours.js";
+import { registerUpdateRecord } from "./update-record.js";
 
 export function registerAllTools(server: McpServer): void {
   registerSetApiKey(server);
@@ -13,4 +15,6 @@ export function registerAllTools(server: McpServer): void {
   registerGetBug(server);
   registerGetGitBranches(server);
   registerGetRecord(server);
+  registerGetWorkingHours(server);
+  registerUpdateRecord(server);
 }
