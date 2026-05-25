@@ -16,6 +16,7 @@ export interface ListRecordsParams {
   sorts?: RecordSort[];
   size?: number;
   searchAfter?: unknown[];
+  orderDirection?: "next" | "previous";
   showDetailOnRecord?: boolean;
   clientTimeZone?: string;
 }
@@ -28,7 +29,7 @@ export async function listRecords(
   params: ListRecordsParams,
 ): Promise<RowsPayloadT> {
   const body = {
-    order_direction: "next",
+    order_direction: params.orderDirection ?? "next",
     workspace_id: WORKSPACE_ID,
     size: params.size ?? 1,
     search_after: params.searchAfter ?? [],
